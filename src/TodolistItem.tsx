@@ -1,5 +1,6 @@
 
 import {Button} from "./Button.tsx";
+import {FilterValues} from "./App.tsx";
 
 export type TaskType = {
     id: number
@@ -11,11 +12,12 @@ export type TodolistItemType = {
     title: string
     tasks: TaskType[]
     deleteTask: (taskId: TaskType['id']) => void
+    changeFilter: (filter: FilterValues) => void
 }
 
 
 
-export const TodolistItem = ({title, tasks, deleteTask}: TodolistItemType) => {
+export const TodolistItem = ({title, tasks, deleteTask, changeFilter}: TodolistItemType) => {
 
     const tasksList = tasks.length === 0
         ? <li>Task list is empty</li>
@@ -40,13 +42,13 @@ export const TodolistItem = ({title, tasks, deleteTask}: TodolistItemType) => {
             <h3>{title}</h3>
             <div>
                 <input/>
-                <Button title='+'/>
+                <Button title='+' callback={() => {}}/>
             </div>
             {tasksList}
             <div>
-                <Button title='All'/>
-                <Button title='Active'/>
-                <Button title='Completed'/>
+                <Button title='All' callback={() => {changeFilter('all')}}/>
+                <Button title='Active' callback={() => {changeFilter('active')}}/>
+                <Button title='Completed' callback={() => {changeFilter('completed')}}/>
             </div>
         </div>
     );

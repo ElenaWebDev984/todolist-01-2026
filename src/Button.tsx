@@ -1,6 +1,6 @@
 export type ButtonType = {
     title: string
-    callback?: () => void
+    callback: () => void
 
 }
 
