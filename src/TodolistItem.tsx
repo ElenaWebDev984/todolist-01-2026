@@ -9,8 +9,9 @@ export type TodolistItemType = {
 
 export const TodolistItem = ({title, tasks}: TodolistItemType) => {
 
-    const mappedTasks = (
-        <ul>
+    const tasksList = tasks.length === 0
+        ? <li>Task list is empty</li>
+        : <ul>
             {
                 tasks.map(task => {
                     return (
@@ -22,7 +23,7 @@ export const TodolistItem = ({title, tasks}: TodolistItemType) => {
                 })
             }
         </ul>
-    )
+
 
 
     return (
@@ -32,7 +33,7 @@ export const TodolistItem = ({title, tasks}: TodolistItemType) => {
                 <input/>
                 <button>+</button>
             </div>
-            {mappedTasks}
+            {tasksList}
             <div>
                 <button>All</button>
                 <button>Active</button>
