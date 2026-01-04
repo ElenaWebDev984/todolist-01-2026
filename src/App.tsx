@@ -1,5 +1,11 @@
 import './App.css'
-import {TaskType, TodolistItem} from "./TodolistItem.tsx";
+import {TodolistItem} from "./TodolistItem.tsx";
+
+export type TaskType = {
+    id: number
+    title: string
+    isDone: boolean
+}
 
 const tasks1: TaskType[] = [
     {id: 1, title: 'HTML', isDone: true},
