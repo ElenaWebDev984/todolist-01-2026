@@ -1,4 +1,5 @@
 import {TaskType} from "./App.tsx";
+import {Button} from "./Button.tsx";
 
 export type TodolistItemType = {
     title: string
@@ -31,13 +32,13 @@ export const TodolistItem = ({title, tasks}: TodolistItemType) => {
             <h3>{title}</h3>
             <div>
                 <input/>
-                <button>+</button>
+                <Button title='+'/>
             </div>
             {tasksList}
             <div>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
+                <Button title='All'/>
+                <Button title='Active'/>
+                <Button title='Completed'/>
             </div>
         </div>
     );
