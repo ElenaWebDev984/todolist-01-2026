@@ -1,14 +1,21 @@
-import {TaskType} from "./App.tsx";
+
 import {Button} from "./Button.tsx";
+
+export type TaskType = {
+    id: number
+    title: string
+    isDone: boolean
+}
 
 export type TodolistItemType = {
     title: string
     tasks: TaskType[]
+    deleteTask: (taskId: TaskType['id']) => void
 }
 
 
 
-export const TodolistItem = ({title, tasks}: TodolistItemType) => {
+export const TodolistItem = ({title, tasks, deleteTask}: TodolistItemType) => {
 
     const tasksList = tasks.length === 0
         ? <li>Task list is empty</li>
@@ -19,6 +26,7 @@ export const TodolistItem = ({title, tasks}: TodolistItemType) => {
                         <li key={task.id}>
                             <input type="checkbox" checked={task.isDone}/>
                             <span>{task.title}</span>
+                            <Button title='x' callback={() => deleteTask(task.id)}/>
                         </li>
                     )
                 })

@@ -1,33 +1,29 @@
 import './App.css'
-import {TodolistItem} from "./TodolistItem.tsx";
+import {TaskType, TodolistItem} from "./TodolistItem.tsx";
 
-export type TaskType = {
-    id: number
-    title: string
-    isDone: boolean
-}
-
-const tasks1: TaskType[] = [
-    {id: 1, title: 'HTML', isDone: true},
-    {id: 2, title: 'JS', isDone: true},
-    {id: 3, title: 'React', isDone: false},
-]
-
-const tasks2: TaskType[] = [
-    {id: 1, title: 'Milk', isDone: true},
-    {id: 2, title: 'Apple', isDone: true},
-    {id: 3, title: 'Orange', isDone: false},
-]
 
 export const App = () => {
-  return (
-      <div className="app">
-          <TodolistItem title='What to learn'
-          tasks={tasks1}/>
-          <TodolistItem title='What to buy'
-          tasks={tasks2}/>
-      </div>
-  )
+    const todolistTitle = 'What to learn'
+
+
+    let tasks: TaskType[] = [
+        {id: 1, title: 'HTML', isDone: true},
+        {id: 2, title: 'JS', isDone: true},
+        {id: 3, title: 'React', isDone: false},
+    ]
+
+
+    const deleteTask = (taskId: TaskType['id']) => {
+        tasks = tasks.filter(task => task.id !== taskId)
+    }
+
+    return (
+        <div className="app">
+            <TodolistItem title={todolistTitle}
+                          tasks={tasks}
+                          deleteTask={deleteTask}/>
+        </div>
+    )
 }
 
 
