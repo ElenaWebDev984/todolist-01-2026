@@ -13,11 +13,12 @@ export type TodolistItemType = {
     tasks: TaskType[]
     deleteTask: (taskId: TaskType['id']) => void
     changeFilter: (filter: FilterValues) => void
+    createTask: () => void
 }
 
 
 
-export const TodolistItem = ({title, tasks, deleteTask, changeFilter}: TodolistItemType) => {
+export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask}: TodolistItemType) => {
 
     const tasksList = tasks.length === 0
         ? <li>Task list is empty</li>
@@ -42,7 +43,7 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter}: TodolistI
             <h3>{title}</h3>
             <div>
                 <input/>
-                <Button title='+' callback={() => {}}/>
+                <Button title='+' callback={() => {createTask()}}/>
             </div>
             {tasksList}
             <div>
