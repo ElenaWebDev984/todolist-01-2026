@@ -3,7 +3,7 @@ import {Button} from "./Button.tsx";
 import {FilterValues} from "./App.tsx";
 
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
 }
