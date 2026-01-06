@@ -23,6 +23,11 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
 
     const [taskTitle, setTaskTitle] = useState('')
 
+    const createTaskHandler = () => {
+        createTask(taskTitle)
+        setTaskTitle('')
+    }
+
     const tasksList = tasks.length === 0
         ? <li>Task list is empty</li>
         : <ul>
@@ -46,10 +51,7 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
             <h3>{title}</h3>
             <div>
                 <input value={taskTitle} onChange={(event => setTaskTitle(event.currentTarget.value))}/>
-                <Button title='+' callback={() => {
-                    createTask(taskTitle)
-                    setTaskTitle('')
-                }}/>
+                <Button title='+' callback={createTaskHandler}/>
             </div>
             {tasksList}
             <div>
