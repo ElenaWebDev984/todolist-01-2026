@@ -1,4 +1,3 @@
-
 import {Button} from "./Button.tsx";
 import {FilterValues} from "./App.tsx";
 import {useState} from "react";
@@ -16,7 +15,6 @@ export type TodolistItemType = {
     changeFilter: (filter: FilterValues) => void
     createTask: (title: string) => void
 }
-
 
 
 export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask}: TodolistItemType) => {
@@ -45,19 +43,30 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
         </ul>
 
 
-
     return (
         <div>
             <h3>{title}</h3>
             <div>
-                <input value={taskTitle} onChange={(event => setTaskTitle(event.currentTarget.value))}/>
+                <input value={taskTitle}
+                       onChange={event => setTaskTitle(event.currentTarget.value)}
+                       onKeyDown={event => {
+                           if (event.key === 'Enter') {
+                               createTaskHandler()
+                           }
+                       }}/>
                 <Button title='+' callback={createTaskHandler}/>
             </div>
             {tasksList}
             <div>
-                <Button title='All' callback={() => {changeFilter('all')}}/>
-                <Button title='Active' callback={() => {changeFilter('active')}}/>
-                <Button title='Completed' callback={() => {changeFilter('completed')}}/>
+                <Button title='All' callback={() => {
+                    changeFilter('all')
+                }}/>
+                <Button title='Active' callback={() => {
+                    changeFilter('active')
+                }}/>
+                <Button title='Completed' callback={() => {
+                    changeFilter('completed')
+                }}/>
             </div>
         </div>
     );
