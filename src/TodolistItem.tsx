@@ -1,6 +1,7 @@
 
 import {Button} from "./Button.tsx";
 import {FilterValues} from "./App.tsx";
+import {useRef} from "react";
 
 export type TaskType = {
     id: string
@@ -19,6 +20,8 @@ export type TodolistItemType = {
 
 
 export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask}: TodolistItemType) => {
+
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const tasksList = tasks.length === 0
         ? <li>Task list is empty</li>
@@ -42,7 +45,7 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
         <div>
             <h3>{title}</h3>
             <div>
-                <input/>
+                <input ref={inputRef}/>
                 <Button title='+' callback={() => {createTask()}}/>
             </div>
             {tasksList}
