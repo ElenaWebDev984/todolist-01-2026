@@ -14,7 +14,7 @@ export type TodolistItemType = {
     tasks: TaskType[]
     deleteTask: (taskId: TaskType['id']) => void
     changeFilter: (filter: FilterValues) => void
-    createTask: () => void
+    createTask: (title: string) => void
 }
 
 
@@ -46,7 +46,12 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
             <h3>{title}</h3>
             <div>
                 <input ref={inputRef}/>
-                <Button title='+' callback={() => {createTask()}}/>
+                <Button title='+' callback={() => {
+                    if (inputRef.current) {
+                        createTask(inputRef.current.value)
+                        inputRef.current.value = ''
+                    }
+                }}/>
             </div>
             {tasksList}
             <div>
