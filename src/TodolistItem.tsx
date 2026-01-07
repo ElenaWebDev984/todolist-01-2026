@@ -18,20 +18,31 @@ export type TodolistItemType = {
 }
 
 
-export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask, changeTaskStatus}: TodolistItemType) => {
+export const TodolistItem = ({
+                                 title,
+                                 tasks,
+                                 deleteTask,
+                                 changeFilter,
+                                 createTask,
+                                 changeTaskStatus
+                             }: TodolistItemType) => {
 
     const [taskTitle, setTaskTitle] = useState('')
+    const [error, setError] = useState<string | null>(null)
 
     const createTaskHandler = () => {
         const trimmedTitle = taskTitle.trim()
         if (taskTitle.trim() !== '') {
             createTask(trimmedTitle)
             setTaskTitle('')
+        } else {
+            setError('Title is required')
         }
     }
 
     const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(event.currentTarget.value)
+        setError(null)
     }
 
     const createTaskOnEnterHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -39,8 +50,6 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
             createTaskHandler()
         }
     }
-
-
 
 
     const tasksList = tasks.length === 0
@@ -71,11 +80,14 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
         <div>
             <h3>{title}</h3>
             <div>
-                <input value={taskTitle}
+                <input className={error ? 'error' : ''}
+                       value={taskTitle}
                        onChange={changeTaskTitleHandler}
                        onKeyDown={createTaskOnEnterHandler}/>
 
                 <Button title='+' callback={createTaskHandler}/>
+
+                {error && <div className={'error-message'}>{error}</div>}
             </div>
 
             {tasksList}
