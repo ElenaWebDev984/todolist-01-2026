@@ -41,12 +41,9 @@ export const App = () => {
         setTasks(newTasks)
     }
 
-    const changeTaskStatus = (taskId: TaskType['id'], isDone: TaskType['isDone']) => {
-        const task = tasks.find(task => task.id === taskId)
-        if (task) {
-            task.isDone = isDone
-            setTasks([...tasks])
-        }
+    const changeTaskStatus = (taskId: TaskType['id'], isDone: boolean) => {
+        const newState = tasks.map(task => task.id === taskId ? {...task, isDone} : task)
+        setTasks(newState)
     }
 
 
