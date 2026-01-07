@@ -23,8 +23,9 @@ export const TodolistItem = ({title, tasks, deleteTask, changeFilter, createTask
     const [taskTitle, setTaskTitle] = useState('')
 
     const createTaskHandler = () => {
+        const trimmedTitle = taskTitle.trim()
         if (taskTitle.trim() !== '') {
-            createTask(taskTitle)
+            createTask(trimmedTitle)
             setTaskTitle('')
         }
     }
