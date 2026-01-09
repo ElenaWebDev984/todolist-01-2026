@@ -15,6 +15,7 @@ export type TodolistItemType = {
     changeFilter: (filter: FilterValues) => void
     createTask: (title: string) => void
     changeTaskStatus: (taskId: TaskType['id'], isDone: boolean) => void
+    filter: FilterValues
 }
 
 
@@ -24,7 +25,8 @@ export const TodolistItem = ({
                                  deleteTask,
                                  changeFilter,
                                  createTask,
-                                 changeTaskStatus
+                                 changeTaskStatus,
+                                 filter,
                              }: TodolistItemType) => {
 
     const [taskTitle, setTaskTitle] = useState('')
@@ -66,9 +68,16 @@ export const TodolistItem = ({
 
                     return (
                         <li key={task.id}>
-                            <input type="checkbox" checked={task.isDone} onChange={changeTaskStatusHandler}/>
+                            <input type="checkbox"
+                                   checked={task.isDone}
+                                   onChange={changeTaskStatusHandler}
+                            />
+
                             <span>{task.title}</span>
-                            <Button title='x' callback={deleteTaskHandler}/>
+
+                            <Button title='x'
+                                    callback={deleteTaskHandler}
+                            />
                         </li>
                     )
                 })
@@ -93,15 +102,18 @@ export const TodolistItem = ({
             {tasksList}
 
             <div>
-                <Button title='All' callback={() => {
-                    changeFilter('all')
-                }}/>
-                <Button title='Active' callback={() => {
-                    changeFilter('active')
-                }}/>
-                <Button title='Completed' callback={() => {
-                    changeFilter('completed')
-                }}/>
+                <Button title='All'
+                        callback={() => changeFilter('all')}
+                        className={filter === 'all' ? 'active-filter' : ''}
+                />
+                <Button title='Active'
+                        callback={() => changeFilter('active')}
+                        className={filter === 'active' ? 'active-filter' : ''}
+                />
+                <Button title='Completed'
+                        callback={() => changeFilter('completed')}
+                        className={filter === 'completed' ? 'active-filter' : ''}
+                />
             </div>
         </div>
     );
