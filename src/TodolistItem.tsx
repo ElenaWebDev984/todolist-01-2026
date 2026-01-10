@@ -12,14 +12,14 @@ export type TodolistItemType = {
     todolist: Todolist
     tasks: TaskType[]
     deleteTask: (taskId: TaskType['id']) => void
-    changeFilter: (filter: FilterValues) => void
+    changeFilter: (todolistId: string, filter: FilterValues) => void
     createTask: (title: string) => void
     changeTaskStatus: (taskId: TaskType['id'], isDone: boolean) => void
 }
 
 
 export const TodolistItem = ({
-                                 todolist: {title, filter},
+                                 todolist: {id, title, filter},
                                  tasks,
                                  deleteTask,
                                  changeFilter,
@@ -49,6 +49,10 @@ export const TodolistItem = ({
         if (event.key === 'Enter') {
             createTaskHandler()
         }
+    }
+
+    const changeFilterHandler = (filter: FilterValues) => {
+        changeFilter(id, filter)
     }
 
 
@@ -103,15 +107,15 @@ export const TodolistItem = ({
 
             <div>
                 <Button title='All'
-                        callback={() => changeFilter('all')}
+                        callback={() => changeFilterHandler('all')}
                         className={filter === 'all' ? 'active-filter' : ''}
                 />
                 <Button title='Active'
-                        callback={() => changeFilter('active')}
+                        callback={() => changeFilterHandler('active')}
                         className={filter === 'active' ? 'active-filter' : ''}
                 />
                 <Button title='Completed'
-                        callback={() => changeFilter('completed')}
+                        callback={() => changeFilterHandler('completed')}
                         className={filter === 'completed' ? 'active-filter' : ''}
                 />
             </div>
