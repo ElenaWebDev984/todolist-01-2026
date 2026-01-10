@@ -11,10 +11,10 @@ export type TaskType = {
 export type TodolistItemType = {
     todolist: Todolist
     tasks: TaskType[]
-    deleteTask: (taskId: TaskType['id']) => void
+    deleteTask: (todolistId: string, taskId: TaskType['id']) => void
     changeFilter: (todolistId: string, filter: FilterValues) => void
-    createTask: (title: string) => void
-    changeTaskStatus: (taskId: TaskType['id'], isDone: boolean) => void
+    createTask: (todolistId: string, title: string) => void
+    changeTaskStatus: (todolistId: string, taskId: TaskType['id'], isDone: boolean) => void
 }
 
 
@@ -33,7 +33,7 @@ export const TodolistItem = ({
     const createTaskHandler = () => {
         const trimmedTitle = taskTitle.trim()
         if (taskTitle.trim() !== '') {
-            createTask(trimmedTitle)
+            createTask(id, trimmedTitle)
             setTaskTitle('')
         } else {
             setError('Title is required')
@@ -61,11 +61,11 @@ export const TodolistItem = ({
         : <ul>
             {
                 tasks.map(task => {
-                    const deleteTaskHandler = () => deleteTask(task.id)
+                    const deleteTaskHandler = () => deleteTask(id, task.id)
 
                     const changeTaskStatusHandler = (event: ChangeEvent<HTMLInputElement>) => {
                         const newStatusValue = event.currentTarget.checked
-                        changeTaskStatus(task.id, newStatusValue)
+                        changeTaskStatus(id, task.id, newStatusValue)
                     }
 
                     return (
