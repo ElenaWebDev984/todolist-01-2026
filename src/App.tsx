@@ -47,8 +47,7 @@ export const App = () => {
 
     const createTask = (todolistId: string, title: string) => {
         const newTask = {id: v1(), title, isDone: false}
-        const newTasks = {...tasks, [todolistId]: [newTask, ...tasks[todolistId]]}
-        setTasks(newTasks)
+        setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
     }
 
     const changeTaskStatus = (taskId: TaskType['id'], isDone: boolean) => {
